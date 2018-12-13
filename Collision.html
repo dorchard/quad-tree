@@ -1,0 +1,55 @@
+<!doctype html>
+<html> <head>
+<title>Collisions example</title>
+
+<script src="Collision.js"></script>
+<script src="QuadTree.js"></script>
+
+<style>
+#canvas {
+  border: solid 1px #888;
+}
+circle {
+  stroke-width:1px;
+  stroke:#104080;
+}
+text {
+  font-family: sans-serif;
+  color: #aaa;
+}
+body {
+  font-family: sans-serif;
+}
+</style>
+
+</head>
+
+<body onLoad="setup();">
+
+<svg id='canvas'></svg>
+
+<br /><br />
+
+<form onInput="updateControls();" id="panel">
+<b>Collision method:</b>
+<input type='radio' name='method' value='slow' checked>&nbsp;All pairs
+<input type='radio' name='method' value='fast'>&nbsp;Quad Tree
+<br /><br />
+
+  Labels: <input type='checkbox' id='labels'>
+  Visualise quad tree: <input type='checkbox' id='quad'>
+  Circles: <input type='number' id='circles'>
+  Radius: <input type='number' id='radius'>
+  <input type='button' value='Restart' onClick='updateCircles();'>
+</form>
+
+<br />
+Compute time: <span id="speed"></span>
+
+<br />
+<div id="status"></div>
+
+
+
+</body>
+</html>
