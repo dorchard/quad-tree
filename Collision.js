@@ -5,8 +5,9 @@ var width = 800;
 var height = 800;
 var numCircles = 25;
 var rad = 15; // radius
+var maxSpeed = 4;
 
-var frameDelay = 1000/24;
+var frameDelay = 1000/36;
 var unpaused = true;
 
 // Control flags
@@ -64,8 +65,8 @@ function setupMain() {
 
 	// Randomise the velocity
 	circles.push({circ: circ, txt: txt,
-		      xv: Math.round(Math.random()*5),
-		      yv: Math.round(Math.random()*5)});
+		      xv: Math.round(Math.random()*maxSpeed),
+		      yv: Math.round(Math.random()*maxSpeed)});
     }
 }
 
