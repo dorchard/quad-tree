@@ -167,7 +167,7 @@ function render(){
 		localObjs = circles;
 	    }
 
-	    collisions(circles[i], localObjs);
+	    collisionsN(circles[i], localObjs);
 	}
 
 	// Show the time taken
@@ -202,4 +202,17 @@ function clearState() {
 
 function makeCircleRed(circle) {
     circle.circ.setAttributeNS(null, 'style', "fill:rgb(250,110,110,0.5)");
+}
+
+
+// Check whether a circle collides with a list of other circles
+function collisionsN(circleA, otherCircles) {
+
+    for (var i = 0; i < otherCircles.length; i++) {
+
+	let circleB = otherCircles[i]
+
+	// Collision of 2 circles
+	collision2(circleA, circleB);
+    }
 }

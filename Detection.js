@@ -1,28 +1,23 @@
 
-// Check whether a circle collides with a list of other circles
-function collisions(circleA, otherCircles) {
+// Detect whether two circles intersect
+function collision2(circleA, circleB) {
 
-    for (var i = 0; i < otherCircles.length; i++) {
+    // If the circles are actually different circles
+    if (circleA != circleB) {
 
-	let circleB = otherCircles[i]
+	// Get mid-point co-ordinates
+	ax = circleA.circ.cx.baseVal.value;
+	ay = circleA.circ.cy.baseVal.value;
 
-	// If the circles are actually different circles
-	if (circleA != circleB) {
+	bx = circleB.circ.cx.baseVal.value;
+	by = circleB.circ.cy.baseVal.value;
 
-	    // Get mid-point co-ordinates
-	    ax = circleA.circ.cx.baseVal.value;
-	    ay = circleA.circ.cy.baseVal.value;
+	// Detect collission
+	if (((bx-ax)**2 + (ay-by)**2) <= (2*rad)**2) {
 
-	    bx = circleB.circ.cx.baseVal.value;
-	    by = circleB.circ.cy.baseVal.value;
+	    // Collision!
+	    makeCircleRed(circleA);
 
-	    // Detect collission
-	    if (((bx-ax)**2 + (ay-by)**2) <= (2*rad)**2) {
-
-		// Collision!
-		makeCircleRed(circleA);
-
-	    }
 	}
     }
 }
