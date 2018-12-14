@@ -7,7 +7,7 @@ var numCircles = 5;
 var rad = 60; // radius
 var maxSpeed = 4;
 
-var frameDelay = 1000/36;
+var frameDelay = 1000/30;
 var unpaused = true;
 
 // Control flags
