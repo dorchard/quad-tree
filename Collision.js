@@ -3,8 +3,8 @@
 var maxObjectsInQuadrant = 4;
 var width = 800;
 var height = 800;
-var numCircles = 25;
-var rad = 15; // radius
+var numCircles = 5;
+var rad = 60; // radius
 var maxSpeed = 4;
 
 var frameDelay = 1000/36;
@@ -200,20 +200,6 @@ function clearState() {
     }
 }
 
-// Check whether a circle collides with a list of other circles
-function collisions(circle, objs) {
-    for (var j = 0; j < objs.length; j++) {
-	if (circle != objs[j]) {
-	    ax = circle.circ.cx.baseVal.value;
-	    ay = circle.circ.cy.baseVal.value;
-
-	    bx = objs[j].circ.cx.baseVal.value;
-	    by = objs[j].circ.cy.baseVal.value;
-
-	    // Colission!
-	    if (((bx-ax)**2 + (ay-by)**2) <= (2*rad)**2) {
-		circle.circ.setAttributeNS(null, 'style', "fill:rgb(250,110,110,0.5)");
-	    }
-	}
-    }
+function makeCircleRed(circle) {
+    circle.circ.setAttributeNS(null, 'style', "fill:rgb(250,110,110,0.5)");
 }
