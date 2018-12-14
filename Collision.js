@@ -19,10 +19,15 @@ var methodNew = "slow";
 // Color of a normal blob
 var normalColor = "rgb(220,220,220,0.5)";
 
+// Object state
 var circles = [];
 
 // quad tree (if using this method)
 var root = null;
+
+// For timing purposes
+var runs = 0;
+var totalTime = 0;
 
 function setup() {
     // Set up event handlers
@@ -72,6 +77,8 @@ function setupMain() {
 
 // Called when the 'Restart' button is hit
 function updateCircles() {
+    totalTime = 0;
+    runs = 0;
     rad = parseInt(document.getElementById("radius").value);
     numCircles = parseInt(document.getElementById("circles").value);
     methodNew = document.getElementById("panel").elements["method"].value;
@@ -106,12 +113,14 @@ function pause(event) {
     }
     if (!unpaused) {
 	document.getElementById("status").innerHTML =
-	    "Paused<br />" + document.getElementById("status").innerHTML;
+	    "<span style='color:red'>Paused</span><br />"
+	  + document.getElementById("status").innerHTML;
     }
 }
 
 function render(){
     var start = new Date().getTime();
+    var time = 0;
 
     if (unpaused) {
 	root = newQuadTreeRoot();
@@ -163,12 +172,18 @@ function render(){
 
 	// Show the time taken
 	var end = new Date().getTime();
-	var time = end - start;
-	document.getElementById("speed").innerHTML = time + "ms";
+	time = end - start;
+	totalTime += time;
+	runs++;
+	document.getElementById("speed").innerHTML = (totalTime / runs).toFixed(1) + "ms";
 	method = methodNew;
     }
 
-    setTimeout(render, frameDelay);
+    var delay = frameDelay - time;
+    if (delay < 0) {
+	delay = 10;
+    }
+    setTimeout(render, delay);
 }
 
 // Reset various things that need resetting between frames,
