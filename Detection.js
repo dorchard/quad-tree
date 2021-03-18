@@ -27,12 +27,11 @@ function collision2(circleA, circleB) {
   }
 }
 
-
 function checkCollisions(circles) {
 	if (method == "fast" && circles.length > 80) {
 		for (var i = 0; i < circles.length; i++) {
 			var localCircles = retrieve(circles[i], root);
-			// check collision foir everything local
+			// check collision for everything local
 			localCircles.forEach(localCircle => collision2(circles[i], localCircle));
 		}
 
