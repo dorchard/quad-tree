@@ -4,7 +4,6 @@ function newQuadTreeRoot() {
     return {x: 0, y: 0, w: width, h: height, children: [], objs: []};
 }
 
-
 // Calculates to which quadrant a circle belongs to for a node
 function getIndex(circle, node) {
 
@@ -120,11 +119,11 @@ function retrieve(circ, node) {
     var ix = getIndex(circ, node);
     if (node.children.length > 0) {
 	if (ix == -1) {
-	// Unforuntate soules not in a quadrant must look at everyone
-  	return node.objs.concat(retrieve(circ, node.children[0]))
-	                .concat(retrieve(circ, node.children[1]))
-  	                .concat(retrieve(circ, node.children[2]))
-		        .concat(retrieve(circ, node.children[3]));
+	// Unforuntate things not in a quadrant must look at everyone
+  	    return node.objs.concat(retrieve(circ, node.children[0]))
+	                    .concat(retrieve(circ, node.children[1]))
+  	                    .concat(retrieve(circ, node.children[2]))
+		            .concat(retrieve(circ, node.children[3]));
 	} else {
 	    // Those in a quadrant look at the quadrant and the parent objects
 	    return node.objs.concat(retrieve(circ, node.children[ix]));

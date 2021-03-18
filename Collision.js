@@ -36,6 +36,7 @@ function setup() {
     // Set up the form
     document.getElementById("circles").value = numCircles;
     document.getElementById("radius").value = rad;
+    document.getElementById("maxObjs").value = maxObjectsInQuadrant;
     setupMain();
 
     // Trigger the main loop
@@ -81,6 +82,7 @@ function updateCircles() {
     runs = 0;
     rad = parseInt(document.getElementById("radius").value);
     numCircles = parseInt(document.getElementById("circles").value);
+    maxObjectsInQuadrant = parseInt(document.getElementById("maxObjs").value);
     methodNew = document.getElementById("panel").elements["method"].value;
 
     // Remove all the old circles
@@ -130,6 +132,7 @@ function render(){
 	    let xv = circles[i].xv;
 	    let yv = circles[i].yv;
 
+	    // Move the circles
 	    circles[i].circ.cx.baseVal.value =
 		(circles[i].circ.cx.baseVal.value + xv) % width;
 
@@ -138,13 +141,13 @@ function render(){
 
 	    // Move the labels if we are viewing labels
 	    if (labels) {
-		circles[i].txt.x.baseVal[0].value = circles[i].circ.cx.baseVal.value - (rad/2);
+				circles[i].txt.x.baseVal[0].value = circles[i].circ.cx.baseVal.value - (rad/2);
 	        circles[i].txt.y.baseVal[0].value = circles[i].circ.cy.baseVal.value + (rad/2);
 	    }
 
 	    // Add into quad tree if we are using this method
 	    if (method == "fast") {
-		insert(circles[i], root);
+				insert(circles[i], root);
 	    }
 	}
 
@@ -155,20 +158,7 @@ function render(){
 	    drawQuadTree(canvas, root, 0);
 	}
 
-	// Go through all circles
-	for (var i = 0; i < circles.length; i++) {
-
-	    // Retrieve from the quad tree if we are using it
-	    if (method == "fast") {
-		localObjs = retrieve(circles[i], root);
-
-	    // Else compare with all the other circles
-	    } else {
-		localObjs = circles;
-	    }
-
-	    collisionsN(circles[i], localObjs);
-	}
+	checkCollisions(circles);
 
 	// Show the time taken
 	var end = new Date().getTime();
@@ -202,17 +192,4 @@ function clearState() {
 
 function makeCircleRed(circle) {
     circle.circ.setAttributeNS(null, 'style', "fill:rgb(250,110,110,0.5)");
-}
-
-
-// Check whether a circle collides with a list of other circles
-function collisionsN(circleA, otherCircles) {
-
-    for (var i = 0; i < otherCircles.length; i++) {
-
-	let circleB = otherCircles[i]
-
-	// Collision of 2 circles
-	collision2(circleA, circleB);
-    }
 }
