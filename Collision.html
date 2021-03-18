@@ -20,6 +20,7 @@ text {
 }
 body {
   font-family: sans-serif;
+  font-size: 17pt;
 }
 </style>
 
@@ -37,11 +38,12 @@ body {
 <input type='radio' name='method' value='fast'>&nbsp;Quad Tree
 <br /><br />
 
-  Labels: <input type='checkbox' id='labels'>
-  Visualise quad tree: <input type='checkbox' id='quad'>
+  <input type='checkbox' id='labels'> Labels <br />
+  <input type='checkbox' id='quad'> Visualise quad tree<br /><br />
   Circles: <input type='number' id='circles'>
-  Radius: <input type='number' id='radius'>
-  <input type='button' value='Restart' onClick='updateCircles();'>
+  Radius: <input type='number' id='radius'><br /><br />
+  Max objects in quadrant: <input type='number' id='maxObjs'><br /><br />
+  <input type='submit' value='Restart' onClick='updateCircles();return false;'>
 </form>
 
 <br />

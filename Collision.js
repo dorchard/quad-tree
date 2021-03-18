@@ -3,8 +3,8 @@
 var maxObjectsInQuadrant = 4;
 var width = 800;
 var height = 800;
-var numCircles = 5;
-var rad = 60; // radius
+var numCircles = 10;
+var rad = 40; // radius
 var maxSpeed = 4;
 
 var frameDelay = 1000/30;
