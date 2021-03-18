@@ -12,11 +12,57 @@ function collision2(circleA, circleB) {
 			bx = circleB.circ.cx.baseVal.value;
 			by = circleB.circ.cy.baseVal.value;
 
-			// TODO
+			if (((bx-ax)**2 + (by-ay)**2) <= (2*rad)**2) {
+				// Collision!
+				makeCircleRed(circleA);
+				makeCircleRed(circleB);
+			}
 
   }
 }
 
+
 function checkCollisions(circles) {
-	// TODO
+	if (method == "fast" && circles.length > 80) {
+		for (var i = 0; i < circles.length; i++) {
+			var localCircles = retrieve(circles[i], root);
+			// check collision foir everything local
+			localCircles.forEach(localCircle => collision2(circles[i], localCircle));
+		}
+
+	} else {
+		quadraticBetter(circles);	
+	}
+}
+
+function quadraticBetter(circles) {
+	// number of checks = (n^2 / 2) - n
+	// asymptotic behaviour = O(n^2)
+
+	// Compare all pairs of circles to see if they are colliding
+
+	// i = 1, j = 0
+	// i = 2, j = 0,
+	// i = 2, j = 1,
+	// i = 3, j = 0,
+	// i = 3, j = 1
+	// i = 3, j = 2,
+	// .....
+	for (var i = 0; i < circles.length; i++) {
+		for (var j = 0; j < i; j++) {
+			collision2(circles[i], circles[j]);
+		}
+	}
+}
+
+function quadratic(circles) {
+	// number of checks = n^2
+	// asymptotic behaviour = O(n^2)
+
+	// Compare all pairs of circles to see if they are colliding
+	for (var i = 0; i < circles.length; i++) {
+		for (var j = 0; j < circles.length; j++) {
+			collision2(circles[i], circles[j]);
+		}
+	}
 }
