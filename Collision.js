@@ -53,12 +53,13 @@ function setupMain() {
 	canvas.setAttributeNS(null, 'width', width);
 	for (var i = 0; i < numCircles; i++) {
 		// Creat the circle
+		let rad2 = Math.round(Math.random() * (2*rad));
 		let circ = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 		let x = Math.round(Math.random() * width);
 		let y = Math.round(Math.random() * height);
 		circ.setAttributeNS(null, 'cx', x);
 		circ.setAttributeNS(null, 'cy', y);
-		circ.setAttributeNS(null, 'r', rad);
+		circ.setAttributeNS(null, 'r', rad2);
 		circ.setAttributeNS(null, 'style', "fill:" + normalColor);
 		canvas.appendChild(circ);
 
@@ -71,7 +72,7 @@ function setupMain() {
 
 		// Randomise the velocity
 		circles.push({
-			circ: circ, txt: txt,
+			circ: circ, txt: txt, rad: rad2,
 			xv: Math.round(Math.random() * maxSpeed),
 			yv: Math.round(Math.random() * maxSpeed)
 		});

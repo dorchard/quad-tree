@@ -12,10 +12,16 @@ function collision2(circleA, circleB) {
 			bx = circleB.circ.cx.baseVal.value;
 			by = circleB.circ.cy.baseVal.value;
 
-			if (((bx-ax)**2 + (by-ay)**2) <= (2*rad)**2) {
+			if (((bx-ax)**2 + (by-ay)**2) <= (circleA.rad+circleB.rad)**2) {
 				// Collision!
 				makeCircleRed(circleA);
 				makeCircleRed(circleB);
+				// Turn this on to do basic bouncing 
+				//circleA.xv = -circleA.xv;
+				//circleA.yv = -circleA.yv;
+				//circleB.xv = -circleB.xv;
+				//circleB.yv = -circleB.yv;
+
 			}
 
   }
